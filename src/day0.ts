@@ -11,7 +11,7 @@ class Day0 extends AOC22 {
     }
 }
 
-const day0 = new Day0('day0.txt');
+const day0 = new Day0('day0.txt', ',');
 day0.solve();
 
 console.log(day0.solutions);

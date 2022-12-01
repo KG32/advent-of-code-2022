@@ -9,10 +9,11 @@ class AOC22 {
     data: any[];
     partsSolutions: Solution;
 
-    constructor(fileName: string) {
+    constructor(fileName: string, separator: string) {
         const path = `${process.cwd()}/inputs/${fileName}`;
         const input = fs.readFileSync(path, 'utf8');
-        this.data = input.split('\n')[0].split(',');
+        this.data = input.split(separator);
+
         this.partsSolutions = {
             part1: null,
             part2: null
