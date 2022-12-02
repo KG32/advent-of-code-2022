@@ -13,6 +13,7 @@ class AOC22 {
         const path = `${process.cwd()}/inputs/${fileName}`;
         const input = fs.readFileSync(path, 'utf8');
         this.data = input.split(separator);
+        this.data.pop();
 
         this.partsSolutions = {
             part1: null,
