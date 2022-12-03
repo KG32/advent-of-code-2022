@@ -51,16 +51,16 @@ class Day2 extends AOC22 {
         return player + wlBonus;
     }
 
-    solvePart1() {
+    solvePart1(): number {
         const { data } = this;
         let score = 0;
         data.forEach(pair => {
             score += this.calcRoundScore(pair);
         });
-        this.partsSolutions.part1 = score;
+        return score;
     }
 
-    solvePart2() {
+    solvePart2(): number {
         const { data } = this;
         let score = 0;
         data.forEach(pair => {
@@ -92,9 +92,9 @@ class Day2 extends AOC22 {
             }
             score += this.calcRoundScore(`${opponentCode} ${playerCode}`);
         });
-        this.partsSolutions.part2 = score;
+
+        return score;
     }
 }
 
-const day2 = new Day2('day2.txt', '\n');
-day2.solve();
+export default new Day2('day2.txt', '\n');

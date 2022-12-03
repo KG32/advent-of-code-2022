@@ -45,7 +45,7 @@ class Day3 extends AOC22 {
         return commonItem || '';
     };
 
-    solvePart1(): void {
+    solvePart1(): number {
         const { data } = this;
         let prioritiesSum = 0;
         data.forEach(backpack => {
@@ -53,19 +53,19 @@ class Day3 extends AOC22 {
             const backpackSum = commonItems.reduce((acc, item) => acc + this.getItemPriority(item),0);
             prioritiesSum += backpackSum;
         });
-        this.partsSolutions.part1 = prioritiesSum;
+        // this.partsSolutions.part1 = prioritiesSum;
+        return prioritiesSum
     }
 
-    solvePart2(): void {
+    solvePart2(): number {
         const grouped = this.groupRucksacks(this.data);
         let sum = 0;
         grouped.forEach(group => {
             const commonItem = this.findCommonGroupItem(group);
             sum += this.getItemPriority(commonItem);
         });
-        this.partsSolutions.part2 = sum;
+        return sum;
     }
 }
 
-const day3 = new Day3('day3.txt', '\n');
-day3.solve();
+export default new Day3('day3.txt', '\n');

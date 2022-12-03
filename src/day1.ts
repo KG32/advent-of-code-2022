@@ -32,21 +32,21 @@ class Day1 extends AOC22 {
         return inventory.reduce((acc, curr) => acc + curr);
     }
 
-    solvePart1(): void {
+    solvePart1(): number {
         let mostCalories = 0;
         const { inventories } = this;
         inventories.forEach(inventory => {
             const inventorySum = this.calcCaloriesSum(inventory);
             if (inventorySum > mostCalories) mostCalories = inventorySum;
         });
-        this.partsSolutions.part1 = mostCalories;
+
+        return mostCalories;
     }
 
-    solvePart2(): void {
+    solvePart2(): number {
         const caloriesSums = this.inventories.map(inv => this.calcCaloriesSum(inv)).sort((a, b) => b - a);
-        this.partsSolutions.part2 = caloriesSums[0] + caloriesSums[1] + caloriesSums[2];
+        return caloriesSums[0] + caloriesSums[1] + caloriesSums[2];
     }
 }
 
-const day1 = new Day1('day1.txt', '\n');
-day1.solve();
+export default new Day1('day1.txt', '\n');

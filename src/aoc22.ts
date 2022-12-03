@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 interface Solution {
     part1: any;
-    part2: any
+    part2: any;
 }
 
 class AOC22 {
@@ -31,8 +31,8 @@ class AOC22 {
     solvePart2(): void {}
 
     solve() {
-        this.solvePart1();
-        this.solvePart2();
+        this.partsSolutions.part1 = this.solvePart1();
+        this.partsSolutions.part2 = this.solvePart2();
         console.log(this.solutions);
     }
 }
