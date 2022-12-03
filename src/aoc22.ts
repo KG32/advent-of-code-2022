@@ -23,7 +23,17 @@ class AOC22 {
 
     get solutions(): string {
         const { partsSolutions: solution } = this;
-        return `${this.constructor.name}:\npart1: ${solution.part1}\npart2: ${solution.part2}`;
+        return `${this.constructor.name}:\n\ part1: ${solution.part1}\n part2: ${solution.part2}\n`;
+    }
+
+    solvePart1(): void {}
+
+    solvePart2(): void {}
+
+    solve() {
+        this.solvePart1();
+        this.solvePart2();
+        console.log(this.solutions);
     }
 }
 

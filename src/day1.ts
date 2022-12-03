@@ -49,6 +49,4 @@ class Day1 extends AOC22 {
 }
 
 const day1 = new Day1('day1.txt', '\n');
-day1.solvePart1();
-day1.solvePart2();
-console.log(day1.solutions);
+day1.solve();

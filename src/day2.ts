@@ -6,13 +6,30 @@ enum Shape {
     SCISSORS
 };
 
-type RPCInput = 'A' | 'B' | 'C' | 'X' | 'Y' | 'Z' ;
+type RPCInput = 'A' | 'B' | 'C' | 'X' | 'Y' | 'Z';
+type StrategyInput =  'X' | 'Y' | 'Z';
+type ShapeCode = 'A' | 'B' | 'C';
 
 const winMap = {
     [Shape.ROCK]: Shape.SCISSORS,
     [Shape.PAPER]: Shape.ROCK,
     [Shape.SCISSORS]: Shape.PAPER
-}
+};
+
+const shapeMap = {
+    A: Shape.ROCK,
+    B: Shape.PAPER,
+    C: Shape.SCISSORS,
+    X: Shape.ROCK,
+    Y: Shape.PAPER,
+    Z: Shape.SCISSORS
+};
+
+const strategyToPoints = {
+    X: 0,
+    Y: 3,
+    Z: 6
+};
 
 class Day2 extends AOC22 {
     constructor(...props: [string, string]) {
@@ -20,7 +37,6 @@ class Day2 extends AOC22 {
     }
 
     convertInputToShape(input: RPCInput): Shape {
-        const shapeMap = { A: Shape.ROCK, B: Shape.PAPER, C: Shape.SCISSORS, X: Shape.ROCK, Y: Shape.PAPER, Z: Shape.SCISSORS};
         return shapeMap[input];
     }
 
@@ -43,8 +59,42 @@ class Day2 extends AOC22 {
         });
         this.partsSolutions.part1 = score;
     }
+
+    solvePart2() {
+        const { data } = this;
+        let score = 0;
+        data.forEach(pair => {
+            const [opponentCode, strategyCode] = pair.split(' ');
+            const targetPoints = strategyToPoints[strategyCode as StrategyInput];
+            let playerCode: ShapeCode | null = null;
+            if (targetPoints === 3) {
+                playerCode = opponentCode;
+            } else {
+                const opponentShape = this.convertInputToShape(opponentCode);
+                const targetShape = [Shape.ROCK, Shape.PAPER, Shape.SCISSORS]
+                    .filter(shape => {
+                        return shape !== opponentShape;
+                    })
+                    .find(shape => {
+                        if (targetPoints === 6) {
+                            return winMap[shape] === opponentShape;
+                        } else {
+                            return winMap[shape] !== opponentShape;
+                        }
+                    }
+                );
+                for (const key in shapeMap) {
+                    if (shapeMap[key as ShapeCode] === targetShape) {
+                        playerCode = key as ShapeCode;
+                        break;
+                    }
+                }
+            }
+            score += this.calcRoundScore(`${opponentCode} ${playerCode}`);
+        });
+        this.partsSolutions.part2 = score;
+    }
 }
 
 const day2 = new Day2('day2.txt', '\n');
-day2.solvePart1();
-console.log(day2.solutions);
+day2.solve();
