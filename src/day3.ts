@@ -24,7 +24,6 @@ class Day3 extends AOC22 {
                 commonItems.push(item);
             }
         }
-
         return commonItems;
     }
 
@@ -41,7 +40,6 @@ class Day3 extends AOC22 {
         const commonItem = group[0].split('').find(item => {
             return group[1].includes(item) && group[2].includes(item);
         });
-
         return commonItem || '';
     };
 
@@ -53,8 +51,7 @@ class Day3 extends AOC22 {
             const backpackSum = commonItems.reduce((acc, item) => acc + this.getItemPriority(item),0);
             prioritiesSum += backpackSum;
         });
-        // this.partsSolutions.part1 = prioritiesSum;
-        return prioritiesSum
+        return prioritiesSum;
     }
 
     solvePart2(): number {
