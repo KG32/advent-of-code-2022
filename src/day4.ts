@@ -35,26 +35,22 @@ class Day4 extends AOC22 {
 
     }
 
-    solvePart1(): number {
-        const { data } = this;
+    #calculateOverlaps(data: string[], overlapType: OverlapType): number {
         let overlaps = 0;
         data.forEach(input => {
-            const overlap: boolean = this.#checkForOverlap(input, OverlapType.FULL);
+            const overlap: boolean = this.#checkForOverlap(input, overlapType);
             if (overlap) overlaps++;
         });
 
         return overlaps;
     }
 
-    solvePart2(): number {
-        const { data } = this;
-        let overlaps = 0;
-        data.forEach(input => {
-            const overlap: boolean = this.#checkForOverlap(input, OverlapType.PARTIAL);
-            if (overlap) overlaps++;
-        });
+    solvePart1(): number {
+        return this.#calculateOverlaps(this.data, OverlapType.FULL);
+    }
 
-        return overlaps;
+    solvePart2(): number {
+        return this.#calculateOverlaps(this.data, OverlapType.PARTIAL);
     }
 }
 
