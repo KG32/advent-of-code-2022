@@ -36,12 +36,12 @@ class Day2 extends AOC22 {
         super(...props)
     }
 
-    convertInputToShape(input: RPCInput): Shape {
+    #convertInputToShape(input: RPCInput): Shape {
         return shapeMap[input];
     }
 
-    calcRoundScore(pair: string): number {
-        const [opponent, player] = pair.split(' ').map(input => this.convertInputToShape(input as RPCInput));
+    #calcRoundScore(pair: string): number {
+        const [opponent, player] = pair.split(' ').map(input => this.#convertInputToShape(input as RPCInput));
         let wlBonus: 0 | 3 | 6;
         if (player === opponent) {
             wlBonus = 3;
@@ -55,7 +55,7 @@ class Day2 extends AOC22 {
         const { data } = this;
         let score = 0;
         data.forEach(pair => {
-            score += this.calcRoundScore(pair);
+            score += this.#calcRoundScore(pair);
         });
         return score;
     }
@@ -70,7 +70,7 @@ class Day2 extends AOC22 {
             if (targetPoints === 3) {
                 playerCode = opponentCode;
             } else {
-                const opponentShape = this.convertInputToShape(opponentCode);
+                const opponentShape = this.#convertInputToShape(opponentCode);
                 const targetShape = [Shape.ROCK, Shape.PAPER, Shape.SCISSORS]
                     .filter(shape => {
                         return shape !== opponentShape;
@@ -90,7 +90,7 @@ class Day2 extends AOC22 {
                     }
                 }
             }
-            score += this.calcRoundScore(`${opponentCode} ${playerCode}`);
+            score += this.#calcRoundScore(`${opponentCode} ${playerCode}`);
         });
 
         return score;

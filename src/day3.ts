@@ -7,12 +7,12 @@ class Day3 extends AOC22 {
         super(...props);
     }
 
-    getItemPriority(item: string): number {
+    #getItemPriority(item: string): number {
         const offset = item === item.toLowerCase() ? 96 : 38;
         return item.charCodeAt(0) - offset;
     }
 
-    getCommonItems(backpackContent: string): string[] {
+    #getCommonItems(backpackContent: string): string[] {
         const commonItems: string[] = [];
         const mid = backpackContent.length / 2;
         const comp1 = backpackContent.slice(0, mid);
@@ -47,8 +47,8 @@ class Day3 extends AOC22 {
         const { data } = this;
         let prioritiesSum = 0;
         data.forEach(backpack => {
-            const commonItems = this.getCommonItems(backpack);
-            const backpackSum = commonItems.reduce((acc, item) => acc + this.getItemPriority(item),0);
+            const commonItems = this.#getCommonItems(backpack);
+            const backpackSum = commonItems.reduce((acc, item) => acc + this.#getItemPriority(item),0);
             prioritiesSum += backpackSum;
         });
         return prioritiesSum;
@@ -59,7 +59,7 @@ class Day3 extends AOC22 {
         let sum = 0;
         grouped.forEach(group => {
             const commonItem = this.findCommonGroupItem(group);
-            sum += this.getItemPriority(commonItem);
+            sum += this.#getItemPriority(commonItem);
         });
         return sum;
     }

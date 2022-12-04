@@ -7,10 +7,10 @@ class Day1 extends AOC22 {
         super(...props);
         this.data = this.data.map(d => d === '' ? null : Number(d));
         this.inventories = [];
-        this.populateInventories();
+        this.#populateInventories();
     }
 
-    populateInventories(): void {
+    #populateInventories(): void {
         const { data } = this;
         const inventories: number[][] = [];
         for (let i = 0; i < data.length; i++) {
@@ -28,7 +28,7 @@ class Day1 extends AOC22 {
         this.inventories = inventories;
     }
 
-    calcCaloriesSum(inventory: number[]): number {
+    #calcCaloriesSum(inventory: number[]): number {
         return inventory.reduce((acc, curr) => acc + curr);
     }
 
@@ -36,7 +36,7 @@ class Day1 extends AOC22 {
         let mostCalories = 0;
         const { inventories } = this;
         inventories.forEach(inventory => {
-            const inventorySum = this.calcCaloriesSum(inventory);
+            const inventorySum = this.#calcCaloriesSum(inventory);
             if (inventorySum > mostCalories) mostCalories = inventorySum;
         });
 
@@ -44,7 +44,7 @@ class Day1 extends AOC22 {
     }
 
     solvePart2(): number {
-        const caloriesSums = this.inventories.map(inv => this.calcCaloriesSum(inv)).sort((a, b) => b - a);
+        const caloriesSums = this.inventories.map(inv => this.#calcCaloriesSum(inv)).sort((a, b) => b - a);
         return caloriesSums[0] + caloriesSums[1] + caloriesSums[2];
     }
 }
